@@ -113,7 +113,12 @@ export default function RoomPage({
             stream;
         }
 
-        const socket = io();
+        const socket = io({
+          transports: ["websocket", "polling"],
+          reconnection: true,
+          reconnectionAttempts: 12,
+          reconnectionDelay: 500,
+        });
         socketRef.current = socket;
 
         const joinRoom = () => {
@@ -249,6 +254,15 @@ export default function RoomPage({
 
         const handleDisconnect = () => {
           setSocketConnected(false);
+          setStatus("connecting");
+        };
+
+        const handleConnectError = () => {
+          setSocketConnected(false);
+          setStatus("error");
+          setErrorMessage(
+            "Unable to reach signaling server. Please refresh and try again."
+          );
         };
 
         socket.on("connect", joinRoom);
@@ -262,6 +276,7 @@ export default function RoomPage({
         );
         socket.on("user-left", handleUserLeft);
         socket.on("disconnect", handleDisconnect);
+        socket.on("connect_error", handleConnectError);
         socket.on(
           "chat-message",
           handleChatMessage
@@ -300,9 +315,35 @@ export default function RoomPage({
     }
 
     const peer = new RTCPeerConnection({
+      iceCandidatePoolSize: 8,
       iceServers: [
         {
           urls: "stun:stun.l.google.com:19302",
+        },
+        {
+          urls: "stun:openrelay.metered.ca:80",
+        },
+        {
+          urls: "turn:openrelay.metered.ca:80",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
+          urls:
+            "turn:openrelay.metered.ca:80?transport=tcp",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
+          urls: "turn:openrelay.metered.ca:443",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
+          urls:
+            "turns:openrelay.metered.ca:443?transport=tcp",
+          username: "openrelayproject",
+          credential: "openrelayproject",
         },
         {
           urls: "turn:global.relay.metered.ca:80",
