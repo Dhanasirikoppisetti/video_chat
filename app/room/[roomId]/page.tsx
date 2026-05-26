@@ -302,10 +302,29 @@ export default function RoomPage({
     const peer = new RTCPeerConnection({
       iceServers: [
         {
+          urls: "stun:stun.l.google.com:19302",
+        },
+        {
+          urls: "turn:global.relay.metered.ca:80",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
           urls:
-            process.env
-              .NEXT_PUBLIC_STUN_SERVER ||
-            "stun:stun.l.google.com:19302",
+            "turn:global.relay.metered.ca:80?transport=tcp",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
+          urls: "turn:global.relay.metered.ca:443",
+          username: "openrelayproject",
+          credential: "openrelayproject",
+        },
+        {
+          urls:
+            "turns:global.relay.metered.ca:443?transport=tcp",
+          username: "openrelayproject",
+          credential: "openrelayproject",
         },
       ],
     });
