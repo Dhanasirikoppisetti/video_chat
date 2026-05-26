@@ -7,7 +7,7 @@ RUN npm ci
 
 FROM deps AS builder
 COPY . .
-RUN npm run build && npm run build:server
+RUN npm run build
 
 FROM node:22-slim AS runner
 WORKDIR /app

@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "ts-node --project tsconfig.server.json server.ts",
-    "build:server": "tsc -p tsconfig.server.json",
-    "build": "next build",
-    "start": "NODE_ENV=production node dist/server.js"
+    "build": "next build && tsc -p tsconfig.server.json",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4",
