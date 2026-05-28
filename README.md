@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VideoChat Atlas – Real-Time Video Calling Application
 
-## Getting Started
+VideoChat Atlas is a real-time video communication application built using WebRTC and Socket.IO. The project allows multiple users to create or join rooms and communicate using live video and audio streams.
 
-First, run the development server:
+The application is designed to support peer-to-peer communication while maintaining low latency and real-time interaction between users across different networks.
+
+## Features
+
+* Real-time video and audio communication
+* Room creation with unique room IDs
+* Multi-user room support
+* WebRTC peer-to-peer communication
+* Socket.IO signaling server
+* STUN and TURN server integration for better network compatibility
+* Dynamic room routing using Next.js App Router
+* Docker support for containerized deployment
+* Responsive interface for different screen sizes
+* Camera and microphone access handling
+
+## Tech Stack
+
+### Frontend
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+
+### Backend / Communication
+
+* Socket.IO
+* WebRTC
+* Node.js
+* Express Server
+
+### Deployment / Infrastructure
+
+* Docker
+* Docker Compose
+* Render Deployment
+* Metered TURN Servers
+
+## Project Structure
+
+```text
+videochat/
+│
+├── app/
+│   ├── page.tsx
+│   └── room/
+│       └── [roomId]/
+│           └── page.tsx
+│
+├── server.ts
+├── docker-compose.yml
+├── Dockerfile
+├── package.json
+└── README.md
+```
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd videochat
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Running with Docker
 
-## Learn More
+Build and run:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker compose up --build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Access application:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+http://localhost:3000
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project can be deployed using Render.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Steps:
+
+1. Push code to GitHub
+2. Connect repository to Render
+3. Configure build command:
+
+```text
+npm install && npm run build
+```
+
+4. Configure start command:
+
+```text
+npm start
+```
+
+5. Deploy application
+
+## WebRTC Connectivity
+
+This project uses:
+
+* STUN server for public IP discovery
+* TURN server for network traversal across different ISPs and NAT configurations
+
+TURN integration improves connectivity between users on different networks.
+
+## Challenges Faced
+
+Some common challenges during development included:
+
+* NAT traversal issues
+* WebRTC peer connection failures
+* Cross-network communication problems
+* Deployment configuration
+* Socket signaling synchronization
+
+These were resolved using TURN servers and improved signaling logic.
+
+## Future Improvements
+
+* Text chat support
+* Screen sharing
+* Call recording
+* User authentication
+* Better room management
+* Improved UI/UX
+* Connection quality indicators
+
+## Author
+
+Developed as part of a real-time communication project using modern web technologies.
