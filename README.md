@@ -63,7 +63,7 @@ videochat/
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Dhanasirikoppisetti/video_chat
 cd videochat
 ```
 
